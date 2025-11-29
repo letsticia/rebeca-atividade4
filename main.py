@@ -2,6 +2,8 @@ import pandas as pd
 import plotly.express as px
 import streamlit as st
 
+st.title("Dashboard de Covid-19")
+
 df = pd.read_csv('WHO_time_series.csv')
 
 df.info()
@@ -18,6 +20,8 @@ fig1 = px.line(df,
 fig1.update_layout(xaxis_title='Data', yaxis_title='Número de casos acumulados')
 fig1.show()
 
+st.plotly_chart(fig1, use_container_width=True)
+
 df_filtro = df.query("Country == 'Brazil' or Country == 'United States of America' or Country == 'India'")
 fig2 = px.pie(
     df_filtro,
@@ -26,3 +30,5 @@ fig2 = px.pie(
     title= 'Comparativo entre os casos de Covid nos USA, Brasil e India'
 )
 fig2.show()
+
+st.plotly_chart(fig2, use_container_width=True)
